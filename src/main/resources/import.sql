@@ -11,4 +11,11 @@ insert into forma_pagamento(id, descricao, restaurante_id) values (2, 'DEBITO', 
 insert into forma_pagamento(id, descricao, restaurante_id) values (3, 'CREDITO', 2);
 
 
+insert into estado values (null, 'Maranhão');
+insert into estado values (null, 'São Paulo');
+insert into estado values (null, 'Alagoas');
 
+
+insert into permissao values (null, 'Pode administrar o sistema como completo. Acesso total.', 'ADMIN');
+
+insert into cidade values(null, 'Santa Inês', 1);

@@ -6,6 +6,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -15,9 +18,10 @@ import lombok.EqualsAndHashCode;
 public class Cozinha {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@EqualsAndHashCode.Include
+	@EqualsAndHashCode.Include @JsonIgnore
 	private Long id;
 
+	@JsonProperty("titulo")
 	private String nome;
 	
 }

@@ -8,7 +8,6 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
-import com.algafood.domain.model.Cidade;
 import com.algafood.domain.model.Estado;
 import com.algafood.domain.repository.EstadoRepository;
 

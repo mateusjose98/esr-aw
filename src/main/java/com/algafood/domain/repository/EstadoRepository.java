@@ -2,7 +2,6 @@ package com.algafood.domain.repository;
 
 import java.util.List;
 
-import com.algafood.domain.model.Cidade;
 import com.algafood.domain.model.Estado;
 
 public interface EstadoRepository {

@@ -38,7 +38,7 @@ public class CozinhaRepositoryImpl implements CozinhaRepository{
 	public void remover(Long Idcozinha){
 		
 		Cozinha cozinha = this.buscar(Idcozinha);
-		if (cozinha != null) {
+		if (cozinha == null) {
 			throw new EmptyResultDataAccessException(1);
 		}
 		 manager.remove(cozinha);

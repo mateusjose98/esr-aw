@@ -25,3 +25,6 @@ OBS.: Restful é um sistema/API que usa as constraints do REST.
 	- Singleton Resource (recurso único) x Collection Resource (coleções de objetos semelhantes)
 
 
+## Modelo de maturidade de Richardson:
+
+![alt text](https://martinfowler.com/articles/images/richardsonMaturityModel/overview.png)

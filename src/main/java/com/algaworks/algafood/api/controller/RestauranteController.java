@@ -54,6 +54,18 @@ public class RestauranteController {
 		return ResponseEntity.notFound().build();
 	}
 	
+	@GetMapping("/{restauranteId}/min")
+	public ResponseEntity<RestauranteDTO> buscarMin(@PathVariable Long restauranteId) {
+		
+		Optional<RestauranteDTO> restaurante = restauranteRepository.findByIdDTO(restauranteId);
+		
+		if (restaurante.isPresent()) {
+			return ResponseEntity.ok(restaurante.get());
+		}
+		
+		return ResponseEntity.notFound().build();
+	}
+	
 	@PostMapping
 	public ResponseEntity<?> adicionar(@RequestBody Restaurante restaurante) {
 		try {

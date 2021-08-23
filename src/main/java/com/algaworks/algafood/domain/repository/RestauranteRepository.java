@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.algaworks.algafood.api.controller.RestauranteDTO;
 import com.algaworks.algafood.domain.model.Restaurante;
 
 @Repository
@@ -17,7 +16,7 @@ public interface RestauranteRepository
 		extends CustomJpaRepository<Restaurante, Long>, RestauranteRepositoryQueries,
 		JpaSpecificationExecutor<Restaurante> {
 
-	@Query(value = "from Restaurante r join r.cozinha")
+	@Query("from Restaurante r join fetch r.cozinha")
 	List<Restaurante> findAll();
 	
 	List<Restaurante> queryByTaxaFreteBetween(BigDecimal taxaInicial, BigDecimal taxaFinal);
@@ -32,10 +31,5 @@ public interface RestauranteRepository
 	List<Restaurante> findTop2ByNomeContaining(String nome);
 	
 	int countByCozinhaId(Long cozinha);
-
-	@Query(value = " select r.nome as nomeRestaurante, c.nome as nomeCozinha from restaurante r "
-			+ "inner join cozinha c "
-			+ "where r.id = :restauranteId limit 1 ", nativeQuery = true)
-	Optional<RestauranteDTO> findByIdDTO(Long restauranteId);
 	
 }

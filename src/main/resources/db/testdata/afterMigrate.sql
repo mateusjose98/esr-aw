@@ -13,7 +13,6 @@ delete from restaurante_forma_pagamento;
 delete from usuario;
 delete from usuario_grupo;
 
-
 set foreign_key_checks = 1;
 
 alter table cidade auto_increment = 1;
@@ -31,9 +30,9 @@ insert into cozinha (id, nome) values (2, 'Indiana');
 insert into cozinha (id, nome) values (3, 'Argentina');
 insert into cozinha (id, nome) values (4, 'Brasileira');
 
-	insert into estado (id, nome) values (1, 'Minas Gerais');
-	insert into estado (id, nome) values (2, 'São Paulo');
-	insert into estado (id, nome) values (3, 'Ceará');
+insert into estado (id, nome) values (1, 'Minas Gerais');
+insert into estado (id, nome) values (2, 'São Paulo');
+insert into estado (id, nome) values (3, 'Ceará');
 
 insert into cidade (id, nome, estado_id) values (1, 'Uberlândia', 1);
 insert into cidade (id, nome, estado_id) values (2, 'Belo Horizonte', 1);

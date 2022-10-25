@@ -8,6 +8,8 @@ import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.fasterxml.jackson.databind.exc.PropertyBindingException;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.TypeMismatchException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+
+
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -30,6 +35,9 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {public 
 		= "Ocorreu um erro interno inesperado no sistema. Tente novamente e se "
 		+ "o problema persistir, entre em contato com o administrador do sistema.";
 
+	@Autowired
+	private MessageSource messageSource;
+
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 																  HttpHeaders headers,
@@ -41,10 +49,14 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {public 
 				.getBindingResult()
 				.getFieldErrors()
 				.stream()
-				.map(fError -> Problem.Field.builder()
+				.map(fError -> {
+					String message = messageSource.getMessage(fError,
+							LocaleContextHolder.getLocale());
+					return Problem.Field.builder()
 						.name(fError.getField())
-						.userMessage(fError.getDefaultMessage())
-						.build())
+						.userMessage(message)
+						.build();
+				})
 				.collect(Collectors.toList());
 		Problem problem = createProblemBuilder(status, problemType, detail)
 				.userMessage(detail)
